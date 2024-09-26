@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
+import { Roboto as Inter } from "next/font/google";
+import Sidebar from "@/components/sidebar/Sidebar";
+import Header, { HeaderButton } from "@/components/header/Header";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const inter = Inter({
+  weight: ["400", "500", "700", "900"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -26,9 +22,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className} antialiased`}
       >
-        {children}
+        <Header
+          buttons={[
+            <HeaderButton key="home" text="Home" href="/" />,
+          ]} />
+        <div className="flex min-h-screen">
+          <Sidebar />
+          <main className="flex-1 overflow-auto p-6 relative">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
