@@ -1,4 +1,4 @@
-import { CompanyDetails, CompanyFullDetails } from "../types/responses"
+import { CompanyDetails, CompanyFullDetails, PaginatedResponse } from "../types/responses"
 import { get } from "./api"
 
 export const Endpoints = {
@@ -7,5 +7,8 @@ export const Endpoints = {
     },
     getCompanyFullDetails: async (registryCode: string) => {
         return await get<CompanyFullDetails>(`/companies/${registryCode}/full`)
+    },
+    getCompanies: async (page: number, pageSize: number) => {
+        return await get<PaginatedResponse<CompanyDetails>>(`/companies/${page}/${pageSize}`)
     }
 }

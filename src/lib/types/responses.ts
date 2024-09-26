@@ -25,3 +25,35 @@ export interface Quarter {
     laborTaxes: number;
     employees: number;
 }
+
+
+
+export interface PaginatedResponse<T> {
+    content: T[];
+    pageable: Pageable;
+    last: boolean;
+    totalElements: number;
+    totalPages: number;
+    first: boolean;
+    numberOfElements: number;
+    size: number;
+    number: number;
+    sort: Sort;
+    empty: boolean;
+}
+
+export interface Pageable {
+    pageNumber: number;
+    pageSize: number;
+    sort: Sort;
+    offset: number;
+    paged: boolean;
+    unpaged: boolean;
+}
+
+export interface Sort {
+    sorted: boolean;
+    empty: boolean;
+    unsorted: boolean;
+}
+

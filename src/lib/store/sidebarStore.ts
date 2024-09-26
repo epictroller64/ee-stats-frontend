@@ -6,6 +6,6 @@ type SidebarStore = {
 }
 
 export const useSidebarStore = create<SidebarStore>((set) => ({
-    collapsed: false,
+    collapsed: true,
     setCollapsed: (collapsed) => set({ collapsed })
 }))
