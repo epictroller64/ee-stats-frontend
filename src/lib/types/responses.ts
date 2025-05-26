@@ -74,7 +74,11 @@ export interface Person {
     lastName: string;
     country: string;
     target: boolean;
-
+    email: string;
+    phone: string;
+    incorporationDate: string;
+    name: string;
+    address: string;
 }
 
 export interface Ownership {

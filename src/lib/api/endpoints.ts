@@ -20,6 +20,9 @@ export const Endpoints = {
     getPerson: async (id: string) => {
         return await get<Person>(`/persons/${id}`)
     },
+    getPersons: async (page: number, pageSize: number) => {
+        return await get<PaginatedResponse<Person>>(`/persons/all/${page}/${pageSize}`)
+    },
     getOwnerships: async (registryCode: string) => {
         return await get<Ownership[]>(`/ownerships/find/${registryCode}`)
     }
