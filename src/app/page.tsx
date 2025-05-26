@@ -27,7 +27,7 @@ export default function Home() {
           <HiFolder className="text-4xl text-primary" />
           <div>
             <h2 className="text-2xl font-bold mb-2">Company Categories</h2>
-            <p className="text-gray-600">Explore companies grouped by industry, sector, or custom categories.</p>
+            <p className="text-gray-600">Explore companies grouped by industry, sector, or other categories.</p>
           </div>
         </div>
       </Card>
