@@ -3,6 +3,7 @@ import "./globals.css";
 import { Roboto as Inter } from "next/font/google";
 import Sidebar from "@/components/sidebar/Sidebar";
 import Header, { HeaderButton } from "@/components/header/Header";
+import _QueryClientProvider from "../_QueryClientProvider";
 
 const inter = Inter({
   weight: ["400", "500", "700", "900"],
@@ -30,9 +31,11 @@ export default function RootLayout({
           ]} />
         <div className="flex min-h-screen">
           <Sidebar />
-          <main className="flex-1 overflow-auto p-6 relative">
-            {children}
-          </main>
+          <_QueryClientProvider>
+            <main className="flex-1 overflow-auto p-6 relative">
+              {children}
+            </main>
+          </_QueryClientProvider>
         </div>
       </body>
     </html>

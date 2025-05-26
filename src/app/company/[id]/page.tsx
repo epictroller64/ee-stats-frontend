@@ -2,7 +2,13 @@ import { Endpoints } from "@/lib/api/endpoints";
 
 import Card from "@/components/layout/Card";
 import { HiOfficeBuilding, HiLocationMarker, HiCurrencyDollar, HiUserGroup, HiIdentification } from "react-icons/hi";
-import CompanyCharts from "@/components/company/CompanyCharts";
+import dynamic from "next/dynamic";
+
+const CompanyCharts = dynamic(() => import('@/components/company/CompanyCharts'), {
+    ssr: false,
+    loading: () => <Card><p>Loading charts...</p></Card>
+});
+
 
 export default async function Page({ params }: { params: { id: string } }) {
     try {

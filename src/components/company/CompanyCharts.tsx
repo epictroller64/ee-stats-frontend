@@ -3,16 +3,29 @@
 import { CompanyFullDetails, Quarter } from '@/lib/types/responses'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import Card from '../layout/Card'
+import React, { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 type QuarterWithLabel = Quarter & { label: string }
 
-export default function CompanyCharts({ company }: { company: CompanyFullDetails }) {
+// Making it expand because otherwise the charts make my sidebar animations laggy
+
+function CompanyCharts({ company }: { company: CompanyFullDetails }) {
     const sortedQuarters = sortQuarters(company)
-    return <div className="grid grid-cols-2 gap-4">
-        <RevenueChart quarters={sortedQuarters} />
-        <StateTaxesChart quarters={sortedQuarters} />
-        <EmployeesChart quarters={sortedQuarters} />
-        <LaborTaxesChart quarters={sortedQuarters} />
+    const [expanded, setExpanded] = useState(false)
+    return <div className="flex flex-col gap-4">
+        <div className='flex cursor-pointer font-semibold text-2xl' onClick={() => setExpanded(!expanded)}>
+            {expanded ? 'Collapse' : 'Expand graphs'}
+        </div>
+        <AnimatePresence>
+            {expanded && <motion.div
+                className='grid grid-cols-2 gap-4'>
+                <RevenueChart quarters={sortedQuarters} />
+                <StateTaxesChart quarters={sortedQuarters} />
+                <EmployeesChart quarters={sortedQuarters} />
+                <LaborTaxesChart quarters={sortedQuarters} />
+            </motion.div>}
+        </AnimatePresence>
     </div>
 }
 
@@ -87,3 +100,5 @@ function sortQuarters(company: CompanyFullDetails) {
     const sorted = quarters.sort((a, b) => a.year - b.year || a.quarter - b.quarter)
     return sorted
 }
+
+export default React.memo(CompanyCharts)

@@ -10,5 +10,8 @@ export const Endpoints = {
     },
     getCompanies: async (page: number, pageSize: number) => {
         return await get<PaginatedResponse<CompanyDetails>>(`/companies/${page}/${pageSize}`)
+    },
+    searchCompanies: async (name: string, page: number, pageSize: number) => {
+        return await get<PaginatedResponse<CompanyDetails>>(`/companies/search/${name}?page=${page}&size=${pageSize}`)
     }
 }
