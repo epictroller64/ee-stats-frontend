@@ -60,7 +60,7 @@ export interface Sort {
 
 export interface Directorship {
     id: string;
-    directorId: Person;
+    directorId?: Person;
     asset: string;
     registryCode: string;
     startDate: string;
@@ -83,7 +83,7 @@ export interface Person {
 
 export interface Ownership {
     id: string;
-    ownerId: Person;
+    ownerId?: Person;
     startDate: string;
     role: string;
     assetId: string;
