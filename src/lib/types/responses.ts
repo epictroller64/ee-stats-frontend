@@ -57,3 +57,31 @@ export interface Sort {
     unsorted: boolean;
 }
 
+
+export interface Directorship {
+    id: string;
+    directorId: Person;
+    asset: string;
+    registryCode: string;
+    startDate: string;
+    role: string;
+    target: boolean;
+}
+
+export interface Person {
+    id: string;
+    firstName: string;
+    lastName: string;
+    country: string;
+    target: boolean;
+
+}
+
+export interface Ownership {
+    id: string;
+    ownerId: Person;
+    startDate: string;
+    role: string;
+    assetId: string;
+    registryCode: string;
+}

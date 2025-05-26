@@ -3,6 +3,8 @@ import { Endpoints } from "@/lib/api/endpoints";
 import Card from "@/components/layout/Card";
 import { HiOfficeBuilding, HiLocationMarker, HiCurrencyDollar, HiUserGroup, HiIdentification } from "react-icons/hi";
 import dynamic from "next/dynamic";
+import CompanyDirectors from "../../../components/company/CompanyDirectors";
+import CompanyOwnerships from "../../../components/company/CompanyOnwerships";
 
 const CompanyCharts = dynamic(() => import('@/components/company/CompanyCharts'), {
     ssr: false,
@@ -12,7 +14,11 @@ const CompanyCharts = dynamic(() => import('@/components/company/CompanyCharts')
 
 export default async function Page({ params }: { params: { id: string } }) {
     try {
-        const company = await Endpoints.getCompanyFullDetails(params.id);
+        const [company, directorships, ownerships] = await Promise.all([
+            Endpoints.getCompanyFullDetails(params.id),
+            Endpoints.getDirectorships(params.id),
+            Endpoints.getOwnerships(params.id)
+        ]);
         return (
             <div className="space-y-6">
                 <h1 className="text-3xl font-bold mb-6">{company.name}</h1>
@@ -81,6 +87,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                         ))}
                     </div>
                 </Card>
+                <CompanyOwnerships ownerships={ownerships} />
+                <CompanyDirectors directorships={directorships} />
                 <CompanyCharts company={company} />
             </div>
         );
