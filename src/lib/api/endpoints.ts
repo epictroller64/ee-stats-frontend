@@ -17,6 +17,9 @@ export const Endpoints = {
     getCompaniesByOwnerId: async (ownerId: string) => {
         return await get<CompanyDetails[]>(`/companies/owner/${ownerId}`)
     },
+    getCompaniesByDirectorId: async (directorId: string) => {
+        return await get<CompanyDetails[]>(`/companies/director/${directorId}`)
+    },
     getDirectorships: async (registryCode: string) => {
         return await get<Directorship[]>(`/directorships/find/${registryCode}`)
     },

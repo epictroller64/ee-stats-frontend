@@ -2,14 +2,16 @@ import { Endpoints } from "@/lib/api/endpoints";
 import Card from "@/components/layout/Card";
 import { HiUser, HiLocationMarker, HiFlag } from "react-icons/hi";
 import OwnedCompanies from "../../../components/person/OwnedCompanies";
+import DirectedCompanies from "../../../components/person/DirectedCompanies";
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
     try {
-        const [person, ownedCompanies] = await Promise.all([
+        const [person, ownedCompanies, directedCompanies] = await Promise.all([
             Endpoints.getPerson(id),
-            Endpoints.getCompaniesByOwnerId(id)
+            Endpoints.getCompaniesByOwnerId(id),
+            Endpoints.getCompaniesByDirectorId(id)
         ]);
 
         return (
@@ -53,6 +55,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                     </Card>
                 </div>
                 <OwnedCompanies ownedCompanies={ownedCompanies} />
+                <DirectedCompanies directedCompanies={directedCompanies} />
             </div>
         );
     } catch (error) {
