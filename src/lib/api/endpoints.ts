@@ -9,10 +9,13 @@ export const Endpoints = {
         return await get<CompanyFullDetails>(`/companies/${registryCode}/full`)
     },
     getCompanies: async (page: number, pageSize: number) => {
-        return await get<PaginatedResponse<CompanyDetails>>(`/companies/${page}/${pageSize}`)
+        return await get<PaginatedResponse<CompanyDetails>>(`/companies/all/${page}/${pageSize}`)
     },
     searchCompanies: async (name: string, page: number, pageSize: number) => {
         return await get<PaginatedResponse<CompanyDetails>>(`/companies/search/${name}?page=${page}&size=${pageSize}`)
+    },
+    getCompaniesByOwnerId: async (ownerId: string) => {
+        return await get<CompanyDetails[]>(`/companies/owner/${ownerId}`)
     },
     getDirectorships: async (registryCode: string) => {
         return await get<Directorship[]>(`/directorships/find/${registryCode}`)

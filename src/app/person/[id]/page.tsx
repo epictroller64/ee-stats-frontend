@@ -1,12 +1,16 @@
 import { Endpoints } from "@/lib/api/endpoints";
 import Card from "@/components/layout/Card";
 import { HiUser, HiLocationMarker, HiFlag } from "react-icons/hi";
+import OwnedCompanies from "../../../components/person/OwnedCompanies";
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
     try {
-        const person = await Endpoints.getPerson(id);
+        const [person, ownedCompanies] = await Promise.all([
+            Endpoints.getPerson(id),
+            Endpoints.getCompaniesByOwnerId(id)
+        ]);
 
         return (
             <div className="container mx-auto px-4 py-8 space-y-6">
@@ -48,6 +52,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                         </div>
                     </Card>
                 </div>
+                <OwnedCompanies ownedCompanies={ownedCompanies} />
             </div>
         );
     } catch (error) {
