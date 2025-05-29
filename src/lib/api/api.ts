@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 
 
 
-const baseUrl = 'http://localhost:8080'
+const baseUrl = process.env.API_URL || 'http://localhost:8080'
 // Functions to handle API requests to the backend
 // Custom error class for API errors
 export class ApiError extends Error {
